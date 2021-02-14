@@ -1,5 +1,7 @@
 #include "Game.hpp"
 
+GameObject* player;
+
 Game::Game()
 {}
 
@@ -31,6 +33,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
             std::cout << "Renderer Created!" << std::endl;
         }
 
+        int playerDimensions[4] = {414, 835, (int)(414 * 0.1), (int)(835 * 0.1)};
+        player = new GameObject("assets/white-car.png", renderer, playerDimensions);
+
         isRunning = true;
     } else {
         isRunning = false;
@@ -52,12 +57,29 @@ void Game::handleEvent()
 }
 
 void Game::update()
-{}
+{
+    cnt++;
+    std::cout << cnt << std::endl;
+
+    // player->setDimensions(414, 835, 414 * 0.1, 835 * 0.1);
+    player->update();
+}
 
 void Game::render()
 {
+    // SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderClear(renderer);
     // This is where we would add stuff to render
+
+    // Set render color to red ( background will be rendered in this color )
+    // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+    // Render Player
+    player->render();
+
+    // SDL_RenderFillRect(renderer, &rectangle);
+
+    // Render the rect to the screen
     SDL_RenderPresent(renderer);
 }
 

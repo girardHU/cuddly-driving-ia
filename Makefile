@@ -2,12 +2,14 @@
 CC := g++
 
 # set the compiler flags
-CFLAGS := `sdl2-config --libs --cflags`
+CFLAGS := `sdl2-config --libs --cflags` -lSDL2_image
 # add header files here
 HDRS := Game.hpp
 
 # add source files here
 SRCS := Game.cpp \
+		TextureManager.cpp \
+		GameObject.cpp \
 		main.cpp
 
 # generate names of object files
