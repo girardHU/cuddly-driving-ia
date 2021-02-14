@@ -1,6 +1,6 @@
 #include "GameObject.hpp"
 
-GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int dimensions[4])
+GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int dimensions[4], int playerPosition[2])
 {
     renderer = ren;
     objTexture = TextureManager::LoadTexture(texturesheet, renderer);
@@ -8,12 +8,15 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int dimensio
     srcRect.w = dimensions[1];
     destRect.h = dimensions[2];
     destRect.w = dimensions[3];
+
+    xpos = playerPosition[0];
+    ypos = playerPosition[1];
 }
 
 void GameObject::update()
 {
-    xpos = 0;
-    ypos = 0;
+
+
 
     // Will need to be adjusted
     srcRect.x = 0;

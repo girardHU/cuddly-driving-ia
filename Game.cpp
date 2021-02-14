@@ -34,7 +34,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         }
 
         int playerDimensions[4] = {414, 835, (int)(414 * 0.1), (int)(835 * 0.1)};
-        player = new GameObject("assets/white-car.png", renderer, playerDimensions);
+        int playerPosition[2] = {0, 0};
+        player = new GameObject("assets/white-car.png", renderer, playerDimensions, playerPosition);
 
         isRunning = true;
     } else {
