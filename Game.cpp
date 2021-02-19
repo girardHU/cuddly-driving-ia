@@ -34,7 +34,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         }
 
         int playerDimensions[4] = {414, 835, (int)(414 * 0.1), (int)(835 * 0.1)};
-        int playerPosition[2] = {0, 0};
+        int playerPosition[2] = {2, 2};
         player = new GameObject("assets/white-car.png", renderer, playerDimensions, playerPosition);
 
         isRunning = true;
@@ -51,7 +51,12 @@ void Game::handleEvent()
         case SDL_QUIT:
             isRunning = false;
             break;
-
+        case SDL_KEYDOWN:
+            this->keyPressed(&event.key);
+            break;
+        case SDL_KEYUP:
+            this->keyReleased(&event.key);
+            break;
         default:
             break;
     }
@@ -60,7 +65,7 @@ void Game::handleEvent()
 void Game::update()
 {
     cnt++;
-    std::cout << cnt << std::endl;
+    // std::cout << cnt << std::endl;
 
     // player->setDimensions(414, 835, 414 * 0.1, 835 * 0.1);
     player->update();
@@ -90,4 +95,28 @@ void Game::clean()
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;
+}
+
+void Game::keyPressed(SDL_KeyboardEvent* event)
+{
+    std::cout << event->keysym.sym << std::endl;
+    switch (event->keysym.sym) {
+        case 1073741906: // haut
+            player->increaseYpos(-1);
+            break;
+        case 1073741905: // bas
+            player->increaseYpos(1);
+            break;
+        case 1073741904: // gauche
+            player->increaseXpos(-1);
+            break;
+        case 1073741903: // droite
+            player->increaseXpos(1);
+            break;
+    }
+}
+
+void Game::keyReleased(SDL_KeyboardEvent* event)
+{
+    std::cout << event->keysym.sym << std::endl;
 }

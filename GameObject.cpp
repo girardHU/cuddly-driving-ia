@@ -11,6 +11,8 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int dimensio
 
     xpos = playerPosition[0];
     ypos = playerPosition[1];
+    destRect.x = xpos;
+    destRect.y = ypos;
 }
 
 void GameObject::update()
@@ -19,8 +21,8 @@ void GameObject::update()
 
 
     // Will need to be adjusted
-    srcRect.x = 0;
-    srcRect.y = 0;
+    // srcRect.x = 0;
+    // srcRect.y = 0;
     // srcRect.h = 32;
     // srcRect.w = 32;
 
@@ -33,4 +35,16 @@ void GameObject::update()
 void GameObject::render()
 {
     SDL_RenderCopy(renderer, objTexture, &srcRect, &destRect);
+}
+
+void GameObject::increaseXpos(int amount)
+{
+    std::cout << "In increaseXpos by " << amount << " !" << std::endl;
+    this->xpos += amount;
+}
+
+void GameObject::increaseYpos(int amount)
+{
+    std::cout << "In increaseYpos by " << amount << " !" << std::endl;
+    this->ypos += amount;
 }

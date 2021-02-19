@@ -20,6 +20,9 @@ class Game {
         void render();
         void clean();
 
+        void keyPressed(SDL_KeyboardEvent* event);
+        void keyReleased(SDL_KeyboardEvent* event);
+
         bool running() { return isRunning; }
 
     private:

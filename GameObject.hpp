@@ -12,6 +12,8 @@ class GameObject {
         void update();
         void render();
         void setDimensions(int srcH, int srcW, int destH, int destW);
+        void increaseXpos(int amount);
+        void increaseYpos(int amount);
 
     private:
         int xpos;
