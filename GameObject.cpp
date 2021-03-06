@@ -17,9 +17,6 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int dimensio
 
 void GameObject::update()
 {
-
-
-
     // Will need to be adjusted
     // srcRect.x = 0;
     // srcRect.y = 0;
@@ -34,17 +31,34 @@ void GameObject::update()
 
 void GameObject::render()
 {
-    SDL_RenderCopy(renderer, objTexture, &srcRect, &destRect);
+    // SDL_RenderCopy(renderer, objTexture, &srcRect, &destRect);
+    SDL_RenderCopyEx(renderer, objTexture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);
 }
 
-void GameObject::increaseXpos(int amount)
+void GameObject::movePlayer(int velocity)
 {
-    std::cout << "In increaseXpos by " << amount << " !" << std::endl;
-    this->xpos += amount;
+    std::cout << "Moving by " << velocity << " !" << std::endl;
+
+    double pi = 2 * acos(0.0);
+
+    float x_movement = cos(angle * (pi / 180)) * velocity;
+    float y_movement = sin(angle * (pi / 180)) * velocity;
+    this->xpos += x_movement;
+    this->ypos += y_movement;
 }
 
-void GameObject::increaseYpos(int amount)
+void GameObject::rotatePlayer(bool counterClockwise)
 {
-    std::cout << "In increaseYpos by " << amount << " !" << std::endl;
-    this->ypos += amount;
+    if (counterClockwise)
+    {
+        this->angle -= 3;
+    } else
+    {
+        this->angle += 3;
+    }
+    if (this->angle >= 360 || this->angle <= -360)
+    {
+        this->angle = 0;
+    }
+    std::cout << "angle : " << angle << std::endl;
 }

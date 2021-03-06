@@ -34,7 +34,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         }
 
         int playerDimensions[4] = {414, 835, (int)(414 * 0.1), (int)(835 * 0.1)};
-        int playerPosition[2] = {2, 2};
+        int playerPosition[2] = {500, 500};
         player = new GameObject("assets/white-car.png", renderer, playerDimensions, playerPosition);
 
         isRunning = true;
@@ -102,16 +102,18 @@ void Game::keyPressed(SDL_KeyboardEvent* event)
     std::cout << event->keysym.sym << std::endl;
     switch (event->keysym.sym) {
         case 1073741906: // haut
-            player->increaseYpos(-1);
+            // player->increaseYpos(-1);
+            player->movePlayer(20);
             break;
         case 1073741905: // bas
-            player->increaseYpos(1);
+            // player->increaseYpos(1);
+            player->movePlayer(-20);
             break;
         case 1073741904: // gauche
-            player->increaseXpos(-1);
+            player->rotatePlayer(true);
             break;
         case 1073741903: // droite
-            player->increaseXpos(1);
+            player->rotatePlayer(false);
             break;
     }
 }

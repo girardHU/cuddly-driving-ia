@@ -3,6 +3,7 @@
 
 #include "Game.hpp"
 #include "TextureManager.hpp"
+// #include <SDL/SDL_rotozoom.h>
 
 class GameObject {
     public:
@@ -12,8 +13,11 @@ class GameObject {
         void update();
         void render();
         void setDimensions(int srcH, int srcW, int destH, int destW);
-        void increaseXpos(int amount);
-        void increaseYpos(int amount);
+        void movePlayer(int velocity);
+
+        void rotatePlayer(bool counterClockwise);
+
+        int angle = 0;
 
     private:
         int xpos;
@@ -21,6 +25,7 @@ class GameObject {
 
         SDL_Texture* objTexture;
         SDL_Rect srcRect, destRect;
+        SDL_Surface* rotatedImage;
         SDL_Renderer* renderer;
 };
 
